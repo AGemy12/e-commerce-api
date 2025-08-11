@@ -71,7 +71,6 @@ export const getSingleProduct = asyncWrapper(async (req, res, next) => {
 export const addNewProduct = asyncWrapper(async (req, res, next) => {
   const errors = validationResult(req);
 
-  console.log(req.file);
 
   if (!errors.isEmpty()) {
     const error = appError.create(errors.array(), 404, httpStatusText.FAIL);

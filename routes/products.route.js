@@ -17,11 +17,11 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(verifyToken, getAllProducts)
+  .get(getAllProducts)
   .post(verifyToken, upload.single("image"), validationSchema(), addNewProduct);
 router
   .route("/:productId")
-  .get(verifyToken, getSingleProduct)
+  .get(getSingleProduct)
   .patch(verifyToken, updateProduct)
   .delete(
     verifyToken,
