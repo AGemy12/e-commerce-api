@@ -71,7 +71,6 @@ export const getSingleProduct = asyncWrapper(async (req, res, next) => {
 export const addNewProduct = asyncWrapper(async (req, res, next) => {
   const errors = validationResult(req);
 
-
   if (!errors.isEmpty()) {
     const error = appError.create(errors.array(), 404, httpStatusText.FAIL);
 
@@ -85,11 +84,15 @@ export const addNewProduct = asyncWrapper(async (req, res, next) => {
     hasDiscount === "true" || hasDiscount === "1" ? true : false;
   const parsedDiscountPercentage = Number(discountPercentage);
 
+  const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
+    req.file.filename
+  }`;
+
   const newProduct = await Product.create({
     title,
     description,
     price,
-    image: req.file.filename,
+    image: imageUrl,
     hasDiscount: parsedHasDiscount,
     discountPercentage: parsedDiscountPercentage,
   });
