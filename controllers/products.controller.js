@@ -84,7 +84,7 @@ export const addNewProduct = asyncWrapper(async (req, res, next) => {
     hasDiscount === "true" || hasDiscount === "1" ? true : false;
   const parsedDiscountPercentage = Number(discountPercentage);
 
-  const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
+  const imageUrl = `${req.protocol}://${req.get("host")}/api/uploads/${
     req.file.filename
   }`;
 
