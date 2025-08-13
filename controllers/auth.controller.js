@@ -6,7 +6,7 @@ import appError from "../utils/appError.js";
 import { tokenGenerator } from "../utils/generateToken.js";
 
 export const register = asyncWrapper(async (req, res, next) => {
-  const { name, email, password, confirmPassword, role } = req.body;
+  const { name, email, password, confirmPassword, role, avatar } = req.body;
 
   const userMatch = await User.find({ email: email });
 
@@ -30,10 +30,15 @@ export const register = asyncWrapper(async (req, res, next) => {
 
   const passwardHashed = await bcrypt.hash(password, 10);
 
+  const urlImage = `${req.protocol}://${req.get("host")}/api/uploads/${
+    req.file.filename
+  }`;
+
   const newUser = new User({
     name,
     email,
     password: passwardHashed,
+    avatar: urlImage,
     role,
   });
 
