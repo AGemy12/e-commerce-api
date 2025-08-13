@@ -7,6 +7,7 @@ import usersRouter from "./routes/users.route.js";
 import authRouter from "./routes/auth.route.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import cors from "cors";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -22,7 +23,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/products", productRouter);
